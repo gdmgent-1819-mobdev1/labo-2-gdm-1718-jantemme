@@ -118,7 +118,7 @@ function NewPerson(person, storageCounter) {
     }
 
     function showDislikes(){
-        document.getElementById('pastPeople').innerHTML = "<h3>Dislikes</h3><h3>click name to like</h3>";
+        document.getElementById('pastPeople').innerHTML = "<span id='close' class='close'>&times;</span><h3>Dislikes</h3><h3>click name to like</h3>";
         dislikes.forEach(person => {
             document.getElementById('pastPeople').innerHTML += "<h4>" + person.firstName + " " + person.lastName + "</h4>";
         });
@@ -128,6 +128,11 @@ function NewPerson(person, storageCounter) {
         {
             names[x].addEventListener("click", dislikeToLike);
         }
+
+        document.getElementById('close').addEventListener('click', function(){
+            modal.style.display = "none";
+        })
+
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
@@ -136,7 +141,7 @@ function NewPerson(person, storageCounter) {
     }
 
     function showLikes(){
-        document.getElementById('pastPeople').innerHTML = "<h3>Likes</h3><h3>click name to dislike</h3>";
+        document.getElementById('pastPeople').innerHTML = "<span id='close' class='close'>&times;</span><h3>Likes</h3><h3>click name to dislike</h3>";
         likes.forEach(person => {
             document.getElementById('pastPeople').innerHTML += "<h4>" + person.firstName + " " + person.lastName + "</h4>";
         });
@@ -146,6 +151,11 @@ function NewPerson(person, storageCounter) {
         {
             names[x].addEventListener("click", likeToDislike);
         }
+
+        document.getElementById('close').addEventListener('click', function(){
+            modal.style.display = "none";
+        })
+
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";

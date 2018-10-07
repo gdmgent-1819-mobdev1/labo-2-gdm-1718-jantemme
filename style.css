@@ -96,6 +96,13 @@ body{
     background-color: rgba(0,0,0,0.4);
 }
 
+.close {
+    color: rgb(126, 126, 126);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
 h2{
     padding: 0px;
     margin: -8px;
