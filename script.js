@@ -7,11 +7,6 @@ let samePerson = false;
 let lat1, lon1, lat2 = 0, lon2 = 0;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFudGVtbWUiLCJhIjoiY2puMzUxdnl1MzZiNDNxbzhhMjZuZW8ydiJ9.VnvzvyT9kZRkmsgM_gCtdw';
-        var map = new mapboxgl.Map({
-            container: 'pastPeople/map', // HTML container id
-            style: 'mapbox://styles/mapbox/streets-v9', // style URL
-            zoom: 7
-        });
 
 function NewPerson(person, storageCounter) {
     let thisPerson = {};
@@ -212,8 +207,18 @@ function NewPerson(person, storageCounter) {
 
     function showMap(){
         document.getElementById('modal').style.display = "block";
-        
-        map.setCenter([lon2, lat2]);
+        document.getElementById('pastPeople/map').innerHTML = "";
+
+        var map = new mapboxgl.Map({
+            center: [lon2, lat2],
+            container: 'pastPeople/map', // HTML container id
+            style: 'mapbox://styles/mapbox/streets-v9', // style URL
+            zoom: 13
+        });
+
+        var marker = new mapboxgl.Marker()
+        .setLngLat([lon2, lat2])
+        .addTo(map);
 
         window.onclick = function(event) {
             if (event.target == modal) {
