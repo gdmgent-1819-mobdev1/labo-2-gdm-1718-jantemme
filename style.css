@@ -41,6 +41,7 @@ body{
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
     border: 6px solid rgb(187, 187, 187);
+    cursor: pointer;
 }
 
 .button--info{
@@ -103,8 +104,17 @@ body{
     font-weight: bold;
 }
 
+.distance{
+    cursor: pointer;
+}
+
+canvas{
+    width: 320px;
+    height: 500px;
+}
+
 h2{
-    padding: 0px;
+    padding: 3px;
     margin: -8px;
 }
 
@@ -120,6 +130,7 @@ h4{
 
 btn{
     margin: auto;
+    cursor: pointer;
 }
 
 img{
