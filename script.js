@@ -9,6 +9,8 @@ let mousePos1, mousePos2;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFudGVtbWUiLCJhIjoiY2puMzUxdnl1MzZiNDNxbzhhMjZuZW8ydiJ9.VnvzvyT9kZRkmsgM_gCtdw';
 
+let imageHammer = new Hammer(document.getElementById('imageholder'));
+
     function NewPerson(person, storageCounter) {
         let thisPerson = {};
         thisPerson.firstName = person.results[storageCounter].name.first;
@@ -266,5 +268,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiamFudGVtbWUiLCJhIjoiY2puMzUxdnl1MzZiNDNxbzhhM
     document.getElementById('button--likes').addEventListener("click", showLikes);
     document.getElementById('imageholder').addEventListener('dragstart', drag, false);
     document.getElementById('imageholder').addEventListener('dragend', drop, false);
+    imageHammer.on("panleft panright", function(ev) {
+    drag;
+    drop;
+    });
 
     
