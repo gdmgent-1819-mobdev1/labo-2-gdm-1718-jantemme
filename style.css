@@ -77,7 +77,7 @@ body{
 .pastPeople{
     background-color: #fefefe;
     margin: 3% auto;
-    padding: 20px;
+    padding: 0px;
     border: 1px solid #888;
     width: 320px;
     height: 500px;
@@ -134,14 +134,16 @@ h3{
 
 h4{
     padding: 0px;
-    margin: 0px;
+    margin: auto;
     font-family: 'Courier New', Courier, monospace;
 }
 
-btn{
-    margin: auto;
-    cursor: pointer;
+h5{
+    padding-left: 5px;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
 }
+
 
 img{
     width: 100%;

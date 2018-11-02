@@ -5,20 +5,21 @@ let likes = [];
 let dislikes = [];
 let samePerson = false;
 let lat1, lon1, lat2 = 0, lon2 = 0;
+let mousePos1, mousePos2;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFudGVtbWUiLCJhIjoiY2puMzUxdnl1MzZiNDNxbzhhMjZuZW8ydiJ9.VnvzvyT9kZRkmsgM_gCtdw';
 
-function NewPerson(person, storageCounter) {
-    let thisPerson = {};
-    thisPerson.firstName = person.results[storageCounter].name.first;
-    thisPerson.lastName = person.results[storageCounter].name.last;
-    thisPerson.age = person.results[storageCounter].dob.age;
-    thisPerson.area = person.results[storageCounter].location.city;
-    thisPerson.profilePic = person.results[storageCounter].picture.large;
-    thisPerson.userID = person.results[storageCounter].login.uuid;
-    
-    return thisPerson;
-}
+    function NewPerson(person, storageCounter) {
+        let thisPerson = {};
+        thisPerson.firstName = person.results[storageCounter].name.first;
+        thisPerson.lastName = person.results[storageCounter].name.last;
+        thisPerson.age = person.results[storageCounter].dob.age;
+        thisPerson.area = person.results[storageCounter].location.city;
+        thisPerson.profilePic = person.results[storageCounter].picture.large;
+        thisPerson.userID = person.results[storageCounter].login.uuid;
+        
+        return thisPerson;
+    }
 
     function loadNew(){
         fetch("https://randomuser.me/api/?results=10")
@@ -124,10 +125,10 @@ function NewPerson(person, storageCounter) {
     function showDislikes(){
         document.getElementById('pastPeople/map').innerHTML = "<span id='close' class='close'>&times;</span><h3>Dislikes</h3><h3>click name to like</h3>";
         dislikes.forEach(person => {
-            document.getElementById('pastPeople/map').innerHTML += "<h4>" + person.firstName + " " + person.lastName + "</h4>";
+            document.getElementById('pastPeople/map').innerHTML += "<h5>" + person.firstName + " " + person.lastName + "</h5>";
         });
         document.getElementById('modal').style.display = "block";
-        let names = document.getElementsByTagName('h4');
+        let names = document.getElementsByTagName('h5');
         for(let x = 0; x < names.length; x++)
         {
             names[x].addEventListener("click", dislikeToLike);
@@ -147,10 +148,10 @@ function NewPerson(person, storageCounter) {
     function showLikes(){
         document.getElementById('pastPeople/map').innerHTML = "<span id='close' class='close'>&times;</span><h3>Likes</h3><h3>click name to dislike</h3>";
         likes.forEach(person => {
-            document.getElementById('pastPeople/map').innerHTML += "<h4>" + person.firstName + " " + person.lastName + "</h4>";
+            document.getElementById('pastPeople/map').innerHTML += "<h5>" + person.firstName + " " + person.lastName + "</h5>";
         });
         document.getElementById('modal').style.display = "block";
-        let names = document.getElementsByTagName('h4');
+        let names = document.getElementsByTagName('h5');
         for(let x = 0; x < names.length; x++)
         {
             names[x].addEventListener("click", likeToDislike);
@@ -208,24 +209,50 @@ function NewPerson(person, storageCounter) {
     function showMap(){
         document.getElementById('modal').style.display = "block";
         document.getElementById('pastPeople/map').innerHTML = "";
+        var map = null;
+        map = new mapboxgl.Map({
+            container: 'pastPeople/map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: [-74.50, 40], 
+            zoom: 1  
+          });
+        
+          let latlng = [lon2, lat2];
 
-        var map = new mapboxgl.Map({
-            center: [lon2, lat2],
-            container: 'pastPeople/map', // HTML container id
-            style: 'mapbox://styles/mapbox/streets-v9', // style URL
-            zoom: 13
-        });
-
+          console.log(lat2 + lon2);
+        
         var marker = new mapboxgl.Marker()
-        .setLngLat([lon2, lat2])
+        .setLngLat(latlng)
         .addTo(map);
+        
+        map.flyTo({
+        center: latlng,
+        zoom: 11
+        });
 
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-        console.log('skrr');
+    }
+
+    function drag(e){
+        mousePos1 = e.clientX;
+    }
+
+    function drop(e){
+        mousePos2 = e.clientX;
+        let distance = mousePos1 - mousePos2;
+        if(distance > 10)
+        {
+            dislike();
+        }
+        if(distance < -10)
+        {
+            like();
+        }
+        
     }
 
 
@@ -237,4 +264,7 @@ function NewPerson(person, storageCounter) {
     document.getElementById('button--like').addEventListener("click", like);
     document.getElementById('button--dislikes').addEventListener("click", showDislikes);
     document.getElementById('button--likes').addEventListener("click", showLikes);
+    document.getElementById('imageholder').addEventListener('dragstart', drag, false);
+    document.getElementById('imageholder').addEventListener('dragend', drop, false);
+
     

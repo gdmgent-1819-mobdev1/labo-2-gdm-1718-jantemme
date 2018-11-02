@@ -8,6 +8,7 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel=’stylesheet’ />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel=’stylesheet’ />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,14 +20,14 @@
         <div class="logo">
             <h1>tinder</h1>
         </div>
-        <div id="imageholder" class="imageholder"> </div>
+        <div id="imageholder" class="imageholder" draggable="true"> </div>
         <div id="infoholder" class="infoholder"></div>
         <div class="buttonholder">
-            <btn id="button--dislikes">Dislikes</btn>
+            <h4 id="button--dislikes">Dislikes</h4>
             <div id="button--dislike" class="button button--dislike"></div>
             <div class="button button--info"></div>
             <div id="button--like" class="button button--like"></div>
-            <btn id="button--likes">Likes</h3>
+            <h4 id="button--likes">Likes</h4>
         </div>
     </div>
     <script src="./script.js"></script>
